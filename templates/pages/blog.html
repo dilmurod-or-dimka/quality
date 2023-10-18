@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Blog
+{% endblock title %}
+
+{% block title1 %}
+<div class="header_about"></div>
+{% endblock title1 %}
+
+{% block content %}
+<div class="grid_4">
+    <div class="container">
+        <h1 class="blog_head">Blog</h1>
+        <div class="blog_grid span2">
+            {% for blog in blogs %}
+            <div class="col-md-6 blog_box">
+                <a href="{{ blog.get_absolute_url }}" class="mask"><img src="{{ blog.get_photo_blog }}" alt="image" class="img-responsive zoom-img" alt=""/></a>
+                <h3><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></h3>
+                <div class="links">
+                    <ul>
+                        <li><i class="fa blog-icon fa-calendar"> </i><span>{{ blog.created_at }}</span></li>
+                        <li><i class="fa blog-icon fa-user"> </i><span>{{ blog.author }}</span></li>
+                    </ul>
+                </div>
+                <p>{{ blog.descr|truncatechars:150 }}</p>
+                <a href="{{ blog.get_absolute_url }}" class="btn1 btn-8 btn-8c">Read More</a>
+            </div>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+        {% if blogs.has_other_pages %}
+        <div class="pagination">
+            <ul>
+                {% if blogs.has_previous %}
+                <li class="pagination-start firstItem"><a class="pagenav" href="?page=1">Start</a></li>
+                <li class="pagination-prev"><a href="?page={{ blogs.previous_page_number }}" class="border pagenav">Prev</a></li>
+                {% endif %}
+                {% for i in blogs.paginator.page_range %}
+                {% if i == blogs.number %}
+                <li><a class="pagenav " href="?page={{ i }}">{{ i }}</a></li>
+                {% else %}
+                <li><a class="pagenav" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if blogs.has_next %}
+                <li class="pagination-next"><a href="?page={{ blogs.next_page_number }}" class="border pagenav">Next</a></li>
+                <li class="pagination-end lastItem"><a href="?page={{ blogs.paginator.num_pages }}" class="border pagenav">End</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Services
+{% endblock title %}
+
+{% block title1 %}
+<div class="header_about"> </div>
+{% endblock title1 %}
+
+{% block content %}
+<div class="grid_4">
+		<div class="container">
+	           <div class="about-grids service_box">
+				   		{% for service in services %}
+						<div class="col-sm-3 about-grid">
+						    <div class="view view-first">
+                              <img src="{{ service.get_photo_service }}" class="img-responsive" alt=""/>
+                            </div>
+							<h3>{{ service.title }}</h3>
+							<p class="service_desc">{{ service.descr }}</p>
+						</div>
+				   		{% endfor %}
+				        <div class="clearfix"> </div>
+	           </div>
+	   </div>
+	</div>
+{% endblock content %}

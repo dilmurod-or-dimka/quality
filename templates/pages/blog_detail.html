@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Service
+{% endblock title %}
+
+{% block title1 %}
+<div class="header_about"></div>
+{% endblock title1 %}
+
+{% block content %}
+<div class="grid_4">
+    <div class="container">
+        <h1 class="blog_head">Blog</h1>
+        <div class="blog_grid">
+            <div class="blog_box">
+                <img src="{{ blog.get_photo_blog }}" class="img-responsive" alt=""/>
+                <h3>{{ blog.title }}</h3>
+                <div class="links">
+                    <ul>
+                        <li><i class="fa blog-icon fa-calendar"> </i><span>{{ blog.created_at }}</span></li>
+                        <li><i class="fa blog-icon fa-user"> </i><span>{{ blog.author }}</span></li>
+                        {% if not comments_count %}
+                        <li><i class="fa blog-icon fa-comment"> </i><span>No comments</span></li>
+                        {% else %}
+                        <li><i class="fa blog-icon fa-comment"> </i><span>{{ comments_count }}</span></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <p>{{ blog.descr }}</p>
+            </div>
+        </div>
+        <div class="comment">
+            <h2>Comments</h2>
+            {% for comment in comments %}
+            <ul class="comment-list">
+                <li>
+                    <div class="desc1">
+                        <div class="extra">
+                            <time pubdate="" datetime="2014-03-30T14:47:59">
+                                Submitted by {{ comment.author }} on {{ comment.created_at }}
+                            </time>
+                        </div>
+                        <p>{{ comment.content }}</p>
+                        {% if comment.author == request.user or request.user.is_superuser %}
+                        <div class="reply"><a class="comment-reply-link" href="{% url 'del_comment' comment.pk %}">Delete</a></div>
+                        {% endif %}
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+            </ul>
+            {% empty %}
+            <h3>No comments...</h3>
+            {% endfor %}
+        </div>
+        <div class="comments-area">
+            <h3>Add New Comment</h3>
+            {% if request.user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form }}
+                <label class="btn1 btn2 btn-8 btn-8c"><input type="submit" value="Submit Comment"></label>
+            </form>
+            {% else %}
+            <p>Only registered users can leave comments</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block footer %}
+<div class="footer wow fadeInRight" data-wow-delay="0.4s">
+    <div class="container">
+        <div class="footer_top">
+            <div class="col-sm-3">
+                <ul class="list1">
+                    <h3>Browse</h3>
+                    <li><a href="#">Industrial Resources</a></li>
+                    <li><a href="#">Jobs</a></li>
+                    <li><a href="#">Buildings</a></li>
+                    <li><a href="#">Contacts</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <ul class="list1">
+                    <h3>Services</h3>
+                    <li><a href="#">Communications</a></li>
+                    <li><a href="#">Electrical</a></li>
+                    <li><a href="#">Industrial</a></li>
+                    <li><a href="#">Mechanical</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <ul class="list1">
+                    <h3>Navigation</h3>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Apply</a></li>
+                    <li><a href="#">Terms and Conditions</a></li>
+                    <li><a href="#">Register</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <ul class="socials">
+                    <li><a href="#"><i class="fa fb fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa tw fa-twitter"></i></a></li>
+                </ul>
+                <ul class="list2">
+                    <li><strong class="phone">+0018 58287 58</strong><br><small>Mon - Fri / 9.00AM - 06.00PM</small>
+                    </li>
+                    <li>Questions? <a href="malito:mail@demolink.org">mail(at)quality.com</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+{% endblock footer %}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+About
+{% endblock title %}
+
+{% block title1 %}
+<div class="header_about"></div>
+{% endblock title1 %}
+
+{% block content %}
+<div class="grid_1">
+    <div class="container">
+
+        <div class="box_1">
+            <h3>Who we are</h3>
+        </div>
+        <div class="col-md-12 about_banner"><img src="{% static 'images/about.jpg' %}" class="img-responsive" alt=""/>
+        </div>
+        <div class="box_20">
+            {% for about in abouts %}
+            <div class="col-sm-6 box_3">
+                <p>{{ about.descr }}</p>
+            </div>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="grid_3">
+    <div class="container">
+        <h3>Our Staff</h3>
+        <div class="about-grids">
+            {% for human in humans %}
+            <div class="col-sm-3 about-grid margin-bottom-3%">
+                <div class="view view-first">
+                    <img src="{{ human.get_photo_human }}" class="img-responsive" alt=""/>
+                </div>
+                <h4><p>{{ human.title }}</p></h4>
+                <p>{{ human.descr }}</p>
+            </div>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="advantages">
+    <div class="container">
+        <div class="col-md-12 span_2">
+            <h3 class="m_3">Advantages</h3>
+            <div class="feature about_box1">
+                <i class="fa fa-globe"> </i>
+                <h4>Ut wisi enim ad minim</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor
+                    imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                </p>
+            </div>
+            <div class="feature about_box1">
+                <i class="fa fa-heart"> </i>
+                <h4>Claritas est etiam processus</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor
+                    imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                </p>
+            </div>
+            <div class="feature">
+                <i class="fa fa-gears"> </i>
+                <h4>Mirum est notare quam</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor
+                    imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

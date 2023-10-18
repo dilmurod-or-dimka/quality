@@ -1,0 +1,189 @@
+{% load static %}
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Quality Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
+    <script type="{% static 'application/x-javascript' %}">
+    addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+
+
+    </script>
+    <link href="{% static 'css/bootstrap.css' %}" rel='stylesheet' type='text/css'/>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <!-- Custom Theme files -->
+    <link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css'/>
+    <!-- Custom Theme files -->
+    <!--webfont-->
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
+    <!----font-Awesome----->
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+    <!----font-Awesome----->
+    <!--Animation-->
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <link href="{% static 'css/animate.css' %}" rel='stylesheet' type='text/css'/>
+    <script>
+	new WOW().init();
+
+
+    </script>
+    {% block style %}
+    {% endblock style %}
+</head>
+
+<body>
+{% block title1 %}
+
+{% endblock title1 %}
+<div class="header-home">
+    <div class="fixed-header">
+        <div class="logo">
+            <a href="{% url 'home' %}">
+                <span class="secondary">Professional</span>
+                <span class="main">Quality</span>
+            </a>
+        </div>
+        <div class="top-nav">
+            <span class="menu"> </span>
+            <ul>
+                <li class="{% if request.path == '/' %}active{% endif %}"><a href="{% url 'home' %}">Home</a></li>
+                <li class="{% if 'about' in request.path %}active{% endif %}"><a href="{% url 'about' %}">About</a></li>
+                <li class="{% if 'services' in request.path %}active{% endif %}"><a
+                        href="{% url 'services' %}">Services</a></li>
+                <li class="{% if 'blog' in request.path %}active{% endif %}"><a href="{% url 'blog' %}">Blog</a></li>
+                <li class="{% if 'contact' in request.path %}active{% endif %}"><a
+                        href="{% url 'contact' %}">Contact</a></li>
+                {% if not request.user.is_authenticated %}
+                <li class="{% if 'login' in request.path %}active{% endif %}"><a href="{% url 'login' %}">Login</a></li>
+                {% else %}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% endif %}
+            </ul>
+            <!-- script-nav -->
+            <script>
+			$("span.menu").click(function(){
+				$(".top-nav ul").slideToggle(500, function(){
+				});
+			});
+
+
+
+
+
+
+            </script>
+            <!-- //script-nav -->
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!--script-->
+<script>
+			$(document).ready(function(){
+				$(".top-nav li a").click(function(){
+					$(this).parent().addClass("active");
+					$(this).parent().siblings().removeClass("active");
+				});
+			});
+
+
+
+
+
+
+</script>
+<!-- script-for sticky-nav -->
+<script>
+		$(document).ready(function() {
+			 var navoffeset=$(".header-home").offset().top;
+			 $(window).scroll(function(){
+				var scrollpos=$(window).scrollTop();
+				if(scrollpos >=navoffeset){
+					$(".header-home").addClass("fixed");
+				}else{
+					$(".header-home").removeClass("fixed");
+				}
+			 });
+
+		});
+
+
+
+
+
+
+</script>
+<!-- /script-for sticky-nav -->
+<!--//header-->
+{% block content %}
+
+{% endblock content %}
+
+{% if 'registration' in request.path or 'login' in request.path %}
+{% else %}
+<div class="footer wow fadeInRight" data-wow-delay="0.4s">
+    <div class="container">
+        <div class="footer_top">
+
+            {% if 'blog' in request.path %}
+            {% else %}
+            <div class="col-sm-3">
+                <ul class="list1">
+                    <h3>Browse</h3>
+                    {% for blog in blogs %}
+                    <li><a href="{{ blog.get_absolute_url }}">{{ blog.title|truncatechars:20 }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if 'services' in request.path %}
+            {% else %}
+            <div class="col-sm-3">
+                <ul class="list1">
+                    <h3>Services</h3>
+                    {% for service in services %}
+                    <li><a href="{% url 'services' %}">{{ service.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="col-sm-3">
+                <ul class="list1">
+                    <h3>Navigation</h3>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'contact' %}">Apply</a></li>
+                    <li><a href="{% url 'services' %}">Terms and Conditions</a></li>
+                    {% if request.user.is_authenticated %}
+                    {% else %}
+                    <li><a href="{% url 'registration' %}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <ul class="socials">
+                    <li><a href="https://www.facebook.com/dilmurod.burhonov.94"><i class="fa fb fa-facebook"></i></a></li>
+                </ul>
+                <ul class="list2">
+                    <li><strong class="phone">+998(90) 129-15-06</strong><br><small>Mon - Fri / 9.00AM - 06.00PM</small>
+                    </li>
+                    <li>Questions? <a href="mailto:dilmurod1506@gmail.com">dilmurod1506@gmail.com</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+{% endif %}
+</body>
+</html>

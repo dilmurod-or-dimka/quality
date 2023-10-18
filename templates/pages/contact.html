@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Contact
+{% endblock title %}
+
+{% block title1 %}
+<div class="header_about"> </div>
+{% endblock title1 %}
+
+{% block content %}
+<div class="grid_4">
+		<div class="container">
+			<h1 class="blog_head">Contact</h1>
+		    <div class="map">
+			  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3150859.767904157!2d-96.62081048651531!3d39.536794757966845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1408111832978"> </iframe>
+			</div>
+			<div class="contact">
+				<div class="col-md-4 contact_left">
+					<h3>Contact info</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum adipiscing vestibulum sapien, in ultricies tellus dignissim eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+				    <p> Praesent mollis dolor eros, vel facilisis nisi auctor ut. Cras id convallis ipsum. Mauris posuere, ligula ac sodales sollicitudin, risus sapien iaculis libero, ac molestie orci arcu non ante. Fusce est leo, ornare ut porta quis, dictum et mi. Aliquam vel pretium sem</p>
+				</div>
+				<div class="col-md-8 contact_right">
+					<h3>Catch me</h3>
+					<form method="post">
+						<div class="text">
+							<div class="text-fild">
+								<span>Firstname:</span>
+								{% csrf_token %}
+								{{ form.first_name }}
+							</div>
+							<div class="text-fild">
+								<span>Lastname:</span>
+								{% csrf_token %}
+								{{ form.last_name }}
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="msg-fild">
+								<span>Email:</span>
+								{% csrf_token %}
+								{{ form.email_address }}
+						</div>
+						<div class="message-fild">
+								<span>Message:</span>
+								{% csrf_token %}
+								{{ form.message }}
+						</div>
+						<label class="btn1 btn2 btn-8 btn-8c"><input type="submit" value="Send"></label>
+					</form>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		 </div>
+	</div>
+{% endblock content %}
